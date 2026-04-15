@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Sistema de Entregas</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      margin: 30px;
+      background: #f4f6f9;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    input, select {
+      margin: 5px;
+      padding: 6px;
+    }
+
+    button {
+      margin: 5px;
+      padding: 8px;
+      cursor: pointer;
+    }
+
+    .card {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      background: #fafafa;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Sistema de Entregas</h1>
+
+    ID: <input id="id"><br>
+    Cliente: <input id="cliente"><br>
+    Caixas: <input id="caixas"><br>
+
+    Categoria:
+    <select id="categoria">
+      <option value="SIMPLES">SIMPLES</option>
+      <option value="EXPRESSA">EXPRESSA</option>
+    </select><br>
+
+    Implementação:
+    <select id="impl">
+      <option value="simples">simples</option>
+      <option value="expressa">expressa</option>
+    </select><br>
+
+    <button onclick="cadastrar()">Cadastrar</button>
+    <button onclick="listar()">Listar</button>
+    <button onclick="buscar()">Buscar</button>
+    <button onclick="alterar()">Alterar</button>
+    <button onclick="excluir()">Excluir</button>
+
+    <h3>Resultado</h3>
+    <pre id="res"></pre>
+
+    <h3>Lista</h3>
+    <div id="lista"></div>
+  </div>
+
+  <script>
+    const url = "http://localhost:8080/entregas";
+
+    function dados() {
+      return {
+        id: document.getElementById("id").value,
+        cliente: document.getElementById("cliente").value,
+        caixas: parseInt(document.getElementById("caixas").value),
+        categoria: document.getElementById("categoria").value,
+        impl: document.getElementById("impl").value
+      }
+    }
+
+    async function cadastrar() {
+      let d = dados();
+
+      try {
+        let r = await fetch(`${url}?impl=${d.impl}`, {
+          method: "POST",
+          headers: {"Content-Type":"application/json"},
+          body: JSON.stringify({
+            cliente: d.cliente,
+            quantidadeCaixas: d.caixas,
+            categoria: d.categoria
+          })
+        });
+
+        let j = await r.json();
+        document.getElementById("res").textContent = JSON.stringify(j, null, 2);
+        listar();
+
+      } catch(e) {
+        document.getElementById("res").textContent = e;
+      }
+    }
+
+    async function listar() {
+      let impl = document.getElementById("impl").value;
+
+      let r = await fetch(`${url}?impl=${impl}`);
+      let lista = await r.json();
+
+      let html = "";
+
+      lista.forEach(e => {
+       html += `
+  <div class="card">
+    ID: ${e.id} <br>
+    Cliente: ${e.cliente} <br>
+    Quantidade de Caixas: ${e.quantidadeCaixas} <br>
+    Valor: ${e.valor} <br>
+    Categoria: ${e.categoria}
+  </div>
+`;
+      });
+
+      document.getElementById("lista").innerHTML = html;
+    }
+
+    async function buscar() {
+      let d = dados();
+
+      if (!d.id) {
+        alert("Digite o ID");
+        return;
+      }
+
+      let r = await fetch(`${url}/${d.id}?impl=${d.impl}`);
+      let j = await r.json();
+
+      document.getElementById("res").textContent = JSON.stringify(j, null, 2);
+    }
+
+    async function alterar() {
+      let d = dados();
+
+      if (!d.id) {
+        alert("Digite o ID");
+        return;
+      }
+
+      let r = await fetch(`${url}/${d.id}?impl=${d.impl}`, {
+        method: "PUT",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({
+          cliente: d.cliente,
+          quantidadeCaixas: d.caixas,
+          categoria: d.categoria
+        })
+      });
+
+      let j = await r.json();
+      document.getElementById("res").textContent = JSON.stringify(j, null, 2);
+      listar();
+    }
+
+    async function excluir() {
+      let d = dados();
+
+      if (!d.id) {
+        alert("Digite o ID");
+        return;
+      }
+
+      let r = await fetch(`${url}/${d.id}?impl=${d.impl}`, {
+        method: "DELETE"
+      });
+
+      let j = await r.json();
+      document.getElementById("res").textContent = JSON.stringify(j, null, 2);
+      listar();
+    }
+
+    listar();
+  </script>
+
+</body>
+</html>

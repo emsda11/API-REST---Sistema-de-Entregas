@@ -1,0 +1,14 @@
+JUSTIFICATIVA DA ESCOLHA DO DOMÍNIO
+
+O domínio escolhido para esta atividade foi um Sistema de Entregas. 
+A escolha foi feita por ser um contexto adequado para demonstrar os principais conceitos exigidos na atividade, 
+como modelagem de dados, validação, regra de negócio condicional, separação entre entidade e DTO, 
+uso de enums e implementação de diferentes estratégias de serviço.
+
+Nesse sistema, cada entrega possui informações básicas, como nome do cliente, quantidade de caixas, 
+categoria da entrega e valor final recebido. A regra de negócio condicional foi aplicada de forma que 
+o valor da entrega depende da quantidade de caixas e da implementação selecionada. 
+Dessa forma, o sistema consegue representar cenários diferentes de cálculo, permitindo exercitar múltiplas 
+implementações de serviço com baixo acoplamento.
+
+

@@ -1,0 +1,229 @@
+{
+  "info": {
+    "name": "API Entregas - Atividade 01",
+    "_postman_id": "1b1a3f2f-atividade-entregas",
+    "description": "Collection para testar a API de Entregas da atividade de Desenvolvimento Web II.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Status da API",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/entregas/status",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "entregas",
+            "status"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Criar entrega simples",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"cliente\": \"Maria\",\n  \"quantidadeCaixas\": 5,\n  \"categoria\": \"SIMPLES\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/entregas?impl=simples",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "entregas"
+          ],
+          "query": [
+            {
+              "key": "impl",
+              "value": "simples"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Criar entrega expressa",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"cliente\": \"João\",\n  \"quantidadeCaixas\": 12,\n  \"categoria\": \"EXPRESSA\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/entregas?impl=expressa",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "entregas"
+          ],
+          "query": [
+            {
+              "key": "impl",
+              "value": "expressa"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Listar entregas simples",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/entregas?impl=simples",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "entregas"
+          ],
+          "query": [
+            {
+              "key": "impl",
+              "value": "simples"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Buscar entrega por id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/entregas/1?impl=simples",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "entregas",
+            "1"
+          ],
+          "query": [
+            {
+              "key": "impl",
+              "value": "simples"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Atualizar entrega expressa",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"cliente\": \"João Atualizado\",\n  \"quantidadeCaixas\": 20,\n  \"categoria\": \"EXPRESSA\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/entregas/1?impl=expressa",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "entregas",
+            "1"
+          ],
+          "query": [
+            {
+              "key": "impl",
+              "value": "expressa"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Buscar por categoria",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/entregas/categoria/SIMPLES?impl=simples",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "entregas",
+            "categoria",
+            "SIMPLES"
+          ],
+          "query": [
+            {
+              "key": "impl",
+              "value": "simples"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Deletar entrega",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/entregas/1?impl=simples",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "entregas",
+            "1"
+          ],
+          "query": [
+            {
+              "key": "impl",
+              "value": "simples"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

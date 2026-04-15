@@ -1,0 +1,14 @@
+com\example\entregas\exception\RegraNegocioException.class
+com\example\entregas\dto\EntregaRequestDTO.class
+com\example\entregas\service\impl\EntregaServiceSimplesImpl.class
+com\example\entregas\exception\GlobalExceptionHandler.class
+com\example\entregas\service\impl\BaseEntregaService.class
+com\example\entregas\repository\EntregaRepository.class
+com\example\entregas\Application.class
+com\example\entregas\exception\RecursoNaoEncontradoException.class
+com\example\entregas\dto\EntregaResponseDTO.class
+com\example\entregas\service\impl\EntregaServiceExpressaImpl.class
+com\example\entregas\controller\EntregaController.class
+com\example\entregas\enums\CategoriaEntrega.class
+com\example\entregas\model\Entrega.class
+com\example\entregas\service\EntregaService.class
